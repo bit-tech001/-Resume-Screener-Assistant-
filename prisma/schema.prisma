@@ -1,0 +1,38 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Analysis {
+  id                 String   @id @default(cuid())
+  candidateName      String
+  candidateEmail     String?
+  jobDescription     String   @db.Text
+  resumeText         String   @db.Text
+  matchScore         Int
+  matchingSkills     Json
+  skillGaps          Json
+  interviewQuestions Json
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([candidateName])
+  @@index([matchScore])
+  @@index([createdAt])
+}
