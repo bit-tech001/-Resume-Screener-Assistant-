@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## How it works (AI/LLM)
+
+See [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) for the end-to-end flow:
+resume parsing, the Gemini prompt, JSON validation, persistence, safety rules,
+and failure handling.
+
 ## Getting Started
 
 First, run the development server:
