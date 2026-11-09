@@ -92,96 +92,146 @@ export default function HistoryTable({
     );
   }
 
+  const deleteButton = (analysis: HistoryRow) => (
+    <button
+      type="button"
+      aria-label={`Delete analysis for ${analysis.candidateName}`}
+      disabled={deletingId === analysis.id || isPending}
+      onClick={() =>
+        handleDelete(analysis.id, analysis.candidateName)
+      }
+      className="text-slate-400 transition hover:text-red-600 disabled:opacity-50"
+    >
+      {deletingId === analysis.id ? (
+        <Loader2 size={16} className="animate-spin" />
+      ) : (
+        <Trash2 size={16} />
+      )}
+    </button>
+  );
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] text-left text-sm">
-
-        <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-          <tr>
-            <th className="px-5 py-4 font-semibold">
-              Candidate
-            </th>
-
-            <th className="px-5 py-4 font-semibold">
-              Match score
-            </th>
-
-            <th className="px-5 py-4 font-semibold">
-              Date
-            </th>
-
-            <th className="px-5 py-4 text-right font-semibold">
-              Action
-            </th>
-          </tr>
-        </thead>
-
-        <tbody className="divide-y divide-slate-100">
-          {analyses.map((analysis) => (
-            <tr
-              key={analysis.id}
-              className="hover:bg-slate-50"
-            >
-              <td className="px-5 py-4">
-                <p className="font-semibold text-slate-800">
+    <>
+      {/* Mobile / small screen cards */}
+      <div className="divide-y divide-slate-100 md:hidden">
+        {analyses.map((analysis) => (
+          <div key={analysis.id} className="space-y-3 p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate font-semibold text-slate-800">
                   {analysis.candidateName}
                 </p>
 
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 truncate text-xs text-slate-500">
                   {analysis.candidateEmail || "No email provided"}
                 </p>
-              </td>
+              </div>
 
-              <td className="px-5 py-4">
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${scoreBadgeClass(
-                    analysis.matchScore
-                  )}`}
-                >
-                  {analysis.matchScore}%
-                </span>
-              </td>
+              <span
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${scoreBadgeClass(
+                  analysis.matchScore
+                )}`}
+              >
+                {analysis.matchScore}%
+              </span>
+            </div>
 
-              <td className="px-5 py-4 text-slate-500">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs text-slate-500">
                 {new Date(
                   analysis.createdAt
                 ).toLocaleDateString("en-IN")}
-              </td>
+              </span>
 
-              <td className="px-5 py-4">
-                <div className="flex items-center justify-end gap-4">
-                  <Link
-                    href={`/analysis/${analysis.id}`}
-                    className="inline-flex items-center gap-1 font-medium text-blue-600 hover:text-blue-800"
-                  >
-                    View <ArrowRight size={15} />
-                  </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href={`/analysis/${analysis.id}`}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
+                >
+                  View <ArrowRight size={15} />
+                </Link>
 
-                  <button
-                    type="button"
-                    aria-label={`Delete analysis for ${analysis.candidateName}`}
-                    disabled={deletingId === analysis.id || isPending}
-                    onClick={() =>
-                      handleDelete(
-                        analysis.id,
-                        analysis.candidateName
-                      )
-                    }
-                    className="text-slate-400 transition hover:text-red-600 disabled:opacity-50"
-                  >
-                    {deletingId === analysis.id ? (
-                      <Loader2 size={16} className="animate-spin" />
-                    ) : (
-                      <Trash2 size={16} />
-                    )}
-                  </button>
-                </div>
-              </td>
+                {deleteButton(analysis)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table */}
+      <div className="hidden overflow-x-auto md:block">
+        <table className="w-full min-w-[720px] text-left text-sm">
+
+          <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-5 py-4 font-semibold">
+                Candidate
+              </th>
+
+              <th className="px-5 py-4 font-semibold">
+                Match score
+              </th>
+
+              <th className="px-5 py-4 font-semibold">
+                Date
+              </th>
+
+              <th className="px-5 py-4 text-right font-semibold">
+                Action
+              </th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
 
-      </table>
-    </div>
+          <tbody className="divide-y divide-slate-100">
+            {analyses.map((analysis) => (
+              <tr
+                key={analysis.id}
+                className="hover:bg-slate-50"
+              >
+                <td className="px-5 py-4">
+                  <p className="font-semibold text-slate-800">
+                    {analysis.candidateName}
+                  </p>
+
+                  <p className="mt-1 text-xs text-slate-500">
+                    {analysis.candidateEmail || "No email provided"}
+                  </p>
+                </td>
+
+                <td className="px-5 py-4">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${scoreBadgeClass(
+                      analysis.matchScore
+                    )}`}
+                  >
+                    {analysis.matchScore}%
+                  </span>
+                </td>
+
+                <td className="px-5 py-4 text-slate-500">
+                  {new Date(
+                    analysis.createdAt
+                  ).toLocaleDateString("en-IN")}
+                </td>
+
+                <td className="px-5 py-4">
+                  <div className="flex items-center justify-end gap-4">
+                    <Link
+                      href={`/analysis/${analysis.id}`}
+                      className="inline-flex items-center gap-1 font-medium text-blue-600 hover:text-blue-800"
+                    >
+                      View <ArrowRight size={15} />
+                    </Link>
+
+                    {deleteButton(analysis)}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+      </div>
+    </>
   );
 }

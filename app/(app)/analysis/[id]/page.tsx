@@ -52,8 +52,8 @@ async function AnalysisContent({
     <>
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
         <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+          <div className="min-w-0">
+            <h1 className="break-words text-2xl font-bold text-slate-900">
               Candidate report
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -69,9 +69,9 @@ async function AnalysisContent({
         <div className="mt-6 grid gap-4 border-t border-slate-100 pt-6 md:grid-cols-3">
           <div className="flex items-center gap-3">
             <User className="text-slate-400" size={19} />
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-slate-400">Candidate</p>
-              <p className="text-sm font-semibold text-slate-800">
+              <p className="break-words text-sm font-semibold text-slate-800">
                 {analysis.candidateName}
               </p>
             </div>
@@ -79,9 +79,9 @@ async function AnalysisContent({
 
           <div className="flex items-center gap-3">
             <Mail className="text-slate-400" size={19} />
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-slate-400">Email</p>
-              <p className="text-sm font-semibold text-slate-800">
+              <p className="break-words text-sm font-semibold text-slate-800">
                 {analysis.candidateEmail || "Not provided"}
               </p>
             </div>
@@ -121,7 +121,7 @@ async function AnalysisContent({
           <h2 className="font-semibold text-slate-900">
             Job description
           </h2>
-          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-600">
+          <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-slate-600">
             {analysis.jobDescription}
           </p>
         </div>
@@ -130,7 +130,7 @@ async function AnalysisContent({
           <h2 className="font-semibold text-slate-900">
             Candidate resume
           </h2>
-          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-600">
+          <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-slate-600">
             {analysis.resumeText}
           </p>
         </div>

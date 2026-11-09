@@ -14,7 +14,7 @@ export default function AuthCard({
   footer: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] px-5 py-10">
+    <div className="flex min-h-dvh items-center justify-center bg-[#f8fafc] px-4 py-8 sm:px-5 sm:py-10">
       <div className="w-full max-w-md">
 
         <Link

@@ -13,13 +13,19 @@ export default function DashboardShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-dvh bg-[#f8fafc]">
 
       <Suspense fallback={<SidebarFallback />}>
-        <Sidebar />
+        <Sidebar
+          user={
+            <Suspense fallback={<UserBadgeFallback variant="dark" />}>
+              <SessionIndicator variant="dark" />
+            </Suspense>
+          }
+        />
       </Suspense>
 
-      <div className="min-h-screen pl-0 md:pl-[250px]">
+      <div className="min-h-dvh pt-16 pl-0 lg:pt-0 lg:pl-[250px]">
         <Header
           user={
             <Suspense fallback={<UserBadgeFallback />}>
@@ -28,7 +34,7 @@ export default function DashboardShell({
           }
         />
 
-        <main className="mx-auto max-w-[1600px] p-5 md:p-8">
+        <main className="mx-auto max-w-[1600px] p-4 sm:p-5 lg:p-8">
           {children}
         </main>
       </div>

@@ -16,7 +16,7 @@ export default function RecentAnalyses({
 }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-slate-100 p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 p-5">
         <div>
           <h2 className="font-semibold text-slate-900">
             Recent analyses
@@ -58,8 +58,8 @@ export default function RecentAnalyses({
               href={`/analysis/${item.id}`}
               className="flex items-center justify-between gap-4 p-5 hover:bg-slate-50"
             >
-              <div>
-                <p className="text-sm font-semibold text-slate-800">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-slate-800">
                   {item.candidateName}
                 </p>
                 <p className="mt-1 text-xs text-slate-500">
@@ -68,7 +68,7 @@ export default function RecentAnalyses({
               </div>
 
               <span
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${
                   item.matchScore >= 75
                     ? "bg-green-50 text-green-700"
                     : item.matchScore >= 50

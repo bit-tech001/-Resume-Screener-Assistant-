@@ -18,13 +18,13 @@ export default function MatchScore({
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
+        <div className="min-w-0">
           <div className="flex items-center gap-2 text-sm font-medium text-blue-600">
             <Sparkles size={17} />
             AI analysis completed
           </div>
 
-          <h2 className="mt-2 text-xl font-bold text-slate-900">
+          <h2 className="mt-2 break-words text-xl font-bold text-slate-900">
             {candidateName}
           </h2>
 
@@ -33,7 +33,7 @@ export default function MatchScore({
           </p>
         </div>
 
-        <div className="rounded-xl bg-slate-50 px-6 py-4 text-center">
+        <div className="w-full rounded-xl bg-slate-50 px-6 py-4 text-center sm:w-auto">
           <p className="text-xs font-medium text-slate-500">
             Match score
           </p>

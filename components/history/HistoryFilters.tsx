@@ -64,9 +64,9 @@ export default function HistoryFilters({
         event.preventDefault();
         applyFilters(query, range);
       }}
-      className="flex flex-wrap items-center gap-3"
+      className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
     >
-      <div className="relative">
+      <div className="relative w-full sm:w-auto">
         <Search
           size={16}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
@@ -80,7 +80,7 @@ export default function HistoryFilters({
         />
       </div>
 
-      <div className="relative">
+      <div className="relative w-full sm:w-auto">
         <SlidersHorizontal
           size={16}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
@@ -92,7 +92,7 @@ export default function HistoryFilters({
             applyFilters(query, event.target.value);
           }}
           aria-label="Filter by match score"
-          className="h-10 appearance-none rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-8 text-sm text-slate-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+          className="h-10 w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-8 text-sm text-slate-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 sm:w-auto"
         >
           {RANGE_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -105,7 +105,7 @@ export default function HistoryFilters({
       <button
         type="submit"
         disabled={isPending}
-        className="h-10 rounded-lg bg-blue-600 px-4 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
+        className="h-10 w-full rounded-lg bg-blue-600 px-4 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60 sm:w-auto"
       >
         Apply
       </button>
@@ -119,7 +119,7 @@ export default function HistoryFilters({
             setRange("");
             applyFilters("", "");
           }}
-          className="flex h-10 items-center gap-1.5 rounded-lg border border-slate-200 px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-60"
+          className="flex h-10 w-full items-center justify-center gap-1.5 rounded-lg border border-slate-200 px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-60 sm:w-auto"
         >
           <X size={15} />
           Clear

@@ -41,9 +41,11 @@ const navigation = [
 function SidebarPanel({
   pathname,
   onNavigate,
+  user,
 }: {
   pathname: string;
   onNavigate?: () => void;
+  user?: React.ReactNode;
 }) {
   return (
     <aside className="flex h-full w-[250px] shrink-0 flex-col border-r border-slate-800 bg-[#101827] text-white">
@@ -94,6 +96,12 @@ function SidebarPanel({
 
       {/* Bottom section */}
       <div className="shrink-0 p-4">
+        {user && (
+          <div className="mb-3 rounded-xl border border-slate-700 bg-slate-800/60 p-3">
+            {user}
+          </div>
+        )}
+
         <div className="rounded-xl border border-slate-700 bg-slate-800/60 p-4">
           <div className="mb-2 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-green-400" />
@@ -118,20 +126,24 @@ function SidebarPanel({
 
 export function SidebarFallback() {
   return (
-    <div className="hidden h-screen lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:block">
+    <div className="hidden h-dvh lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:block">
       <SidebarPanel pathname="" />
     </div>
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({
+  user,
+}: {
+  user?: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="fixed inset-y-0 left-0 z-40 hidden h-screen lg:block">
+      <div className="fixed inset-y-0 left-0 z-40 hidden h-dvh lg:block">
         <SidebarPanel pathname={pathname} />
       </div>
 
@@ -189,6 +201,7 @@ export default function Sidebar() {
 
           <SidebarPanel
             pathname={pathname}
+            user={user}
             onNavigate={() => setIsOpen(false)}
           />
         </div>
